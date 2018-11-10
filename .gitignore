@@ -10,7 +10,9 @@ temp/*
 
 # App
 /app/config/config.local.neon
-/www/dist
 
 # Composer
 /vendor
+
+#NetBeans IDE
+/nbproject
