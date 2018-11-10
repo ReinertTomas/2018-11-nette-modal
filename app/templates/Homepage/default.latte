@@ -1,0 +1,148 @@
+{* author - Tomas Reinert ©2018 *}
+
+{* CSS custom *}
+{block head}
+{/block}
+
+{* HTML content *}
+{block content}
+<div class="jumbotron">
+    {snippet form-result}
+        <h4>Form result - {$presenter->isAjax() ? 'Ajax' : 'Redirect'}</h4>
+        {ifset $result}
+            <ul class="list-group">
+                <li n:foreach="$result as $key => $value" class="list-group-item list-group-item-success">{$key}: {$value}</li>
+            </ul>
+        {/ifset}
+    {/snippet}
+</div>
+<div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">User</h4>
+        </div>
+        <div class="card-body">
+            <a n:href="modal! 'user'" class="ajax btn btn-lg btn-block btn-primary" >Open Modal</a>
+        </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Movie - throw Exception</h4>
+        </div>
+        <div class="card-body">
+            <a n:href="modal! 'movie'" class="ajax btn btn-lg btn-block btn-primary" >Open Modal</a>
+        </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Address - Form ajax</h4>
+        </div>
+        <div class="card-body">
+            <a n:href="modal! 'address'" class="ajax btn btn-lg btn-block btn-primary" >Open Modal</a>
+        </div>
+    </div>
+</div>
+
+{* MODAL CONTENT - USER *}
+{define modal-content-user}
+{form formUser}
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <!-- Jednoduché vykreslení chyb -->
+        <ul class="list-unstyled" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error" class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{$error}
+            </li>
+        </ul>
+
+        <div class="form-group">
+            {label name/}
+            {input name 'class' => 'form-control'}
+        </div>
+        <div class="form-group">
+            {label surname /}
+            {input surname 'class' => 'form-control'}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        {input submit_save 'class' => 'btn btn-primary'}
+    </div>
+{/form}
+{/define}
+
+{* MODAL CONTENT - MOVIE *}
+{define modal-content-movie}
+{form formMovie}
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal Movie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <!-- Jednoduché vykreslení chyb -->
+        <ul class="list-unstyled" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error" class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{$error}
+            </li>
+        </ul>
+
+        <div class="form-group">
+            {label title/}
+            {input title 'class' => 'form-control'}
+        </div>
+        <div class="form-group">
+            {label year /}
+            {input year 'class' => 'form-control'}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        {input submit_save 'class' => 'btn btn-primary'}
+    </div>
+{/form}
+{/define}
+
+{* MODAL CONTENT - ADDRESS *}
+{define modal-content-address}
+{form formAddress}
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <!-- Jednoduché vykreslení chyb -->
+        <ul class="list-unstyled" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error" class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{$error}
+            </li>
+        </ul>
+
+        <div class="form-group">
+            {label address/}
+            {input address 'class' => 'form-control'}
+        </div>
+        <div class="form-group">
+            {label city /}
+            {input city 'class' => 'form-control'}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        {input submit_save 'class' => 'btn btn-primary'}
+    </div>
+{/form}
+{/define}
+
+{/block}
