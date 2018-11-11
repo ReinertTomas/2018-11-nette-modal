@@ -16,7 +16,7 @@ Description
     - @layout.latte
         - modal wrapper template with include modal-content
         - nette.ajax.js init
-        - nette.ajax.js extesion for handle show / hide moda window
+        - nette.ajax.js extension for handle show / hide moda window
     - HomepagePresenter.php
         - function handleModal
         - forms
@@ -31,10 +31,10 @@ Assets
 
 All assets included in /www
 
-    - pace.js
     - jquery-3.1.1
     - popper.js
     - bootstrap
-    - netteForms
+    - live-form-validation
     - nette.ajax.js
+    - spinner.ajax.js
 	

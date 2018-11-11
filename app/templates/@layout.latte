@@ -5,22 +5,24 @@
         <title>{ifset title}{include title|stripHtml} | {/ifset}Nette Modal</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Pace.js -->
-        <link rel="stylesheet" href="{$basePath}/css/pace-theme-corner-indicator.css" />
-        <script src="{$basePath}/js/pace.min.js"></script>
-
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
+        <!-- Custom -->
+        <link rel="stylesheet" href="{$basePath}/css/custom.css">
 
         <style>
-            body {
-                padding-top: 5rem;
+            .loader
+            {
+                z-index: 99;
             }
         </style>
-
+        
         {block head}{/block}
     </head>
-    <body >
+    <body>
+
+        <!-- Loader -->
+        <div id="loader" class="loader loader-custom" style="display: none;"></div>
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container">
@@ -35,6 +37,7 @@
                             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
+                    <button type="button" data-loader class="btn btn-success" style="z-index: 1000000;">Spinner</button>
                 </div>
             </div>
         </nav>
@@ -67,23 +70,27 @@
         <!-- Bootstrap -->
         <script src="{$basePath}/js/bootstrap.min.js"></script>
         <!-- NetteForms -->
-        <script src="{$basePath}/js/netteForms.min.js"></script>
+        <script src="{$basePath}/js/live-form-validation.js"></script>
         <!-- Nette ajax -->
         <script src="{$basePath}/js/nette.ajax.js"></script>
+        <!-- Nette ajax -->
+        <script src="{$basePath}/js/spinner.ajax.js"></script>
 
         <script>
 
             $( document ).ready( function ()
             {
+                // NETTE AJAX INIT
                 $.nette.init();
 
+                // NETTE AJAX EXTENSION
                 $.nette.ext( 'modal', {
 
                     success: function ( responseJSON, status, settings )
                     {
                         // get modal element
                         var $modal = $( '#layoutModal' );
-                        
+
                         // is in response any snippet
                         if ( typeof responseJSON.snippets != 'undefined' )
                         {
@@ -93,16 +100,22 @@
                                 // show modal
                                 $modal.modal( 'show' );
                             }
-                            
+
                             if ( !responseJSON.snippets['snippet--modal-content'] && $( 'body' ).hasClass( 'modal-open' ) )
                             {
                                 // hide modal
                                 $modal.modal( 'hide' );
                             }
-                            
+
                         }
 
                     }
+                } );
+                
+                // SPINNER
+                $( 'button[data-loader]' ).click( function( e ) 
+                {
+                    $( '#loader' ).fadeToggle( 200 );
                 } );
 
             } );

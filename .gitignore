@@ -14,5 +14,6 @@ temp/*
 # Composer
 /vendor
 
-#NetBeans IDE
-nbproject
+# Node
+/node_modules
+/nbproject/private/
